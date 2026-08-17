@@ -1,6 +1,6 @@
 {
   "name": "@zanrafal/ai-toolkit",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Team AI artifacts (skills and rules for Claude Code) distributed through GitHub Packages",
   "license": "UNLICENSED",
   "type": "commonjs",

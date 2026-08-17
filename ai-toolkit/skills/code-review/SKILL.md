@@ -49,3 +49,11 @@ Return findings as a numbered list, most-severe first:
 ```
 
 If nothing survives verification, say so plainly — do not pad with speculation.
+
+## Verification pass (v0.1.1)
+
+Before returning findings, run one silent verification pass: for each candidate
+finding, re-read the surrounding code and confirm the failure scenario would
+actually trigger. Drop any finding whose failure scenario collapses on re-read
+— those are the noisy false positives reviewers rightly dismiss.
+
