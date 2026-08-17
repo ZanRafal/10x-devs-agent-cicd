@@ -28,7 +28,7 @@ artifacts (both architect artifacts and champion screenshots) ready to
 paste/attach when the form appears.
 
 ## Status
-- [ ] 10xArchitect artifacts complete
+- [x] 10xArchitect artifacts complete (in a sibling repo, not tracked here)
 - [ ] 10xArchitect submitted
-- [ ] 10xChampion artifacts complete
+- [x] 10xChampion artifacts complete — see `context/proof/README.md`
 - [ ] 10xChampion submitted
