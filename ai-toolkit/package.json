@@ -1,0 +1,32 @@
+{
+  "name": "@zanrafal/ai-toolkit",
+  "version": "0.1.0",
+  "description": "Team AI artifacts (skills and rules for Claude Code) distributed through GitHub Packages",
+  "license": "UNLICENSED",
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZanRafal/10x-devs-agent-cicd.git",
+    "directory": "ai-toolkit"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  },
+  "files": [
+    "skills/",
+    "rules/",
+    "install.js",
+    "uninstall.js",
+    "README.md"
+  ],
+  "scripts": {
+    "postinstall": "node install.js"
+  },
+  "bin": {
+    "ai-toolkit": "./install.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

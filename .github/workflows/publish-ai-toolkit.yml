@@ -1,0 +1,69 @@
+name: Publish AI Toolkit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "ai-toolkit/**"
+      - ".github/workflows/publish-ai-toolkit.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "ai-toolkit/**"
+      - ".github/workflows/publish-ai-toolkit.yml"
+
+permissions:
+  contents: read
+  packages: write
+
+defaults:
+  run:
+    working-directory: ai-toolkit
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@zanrafal"
+
+      - name: Verify required artifacts exist
+        run: |
+          test -f package.json
+          test -f install.js
+          test -f uninstall.js
+          test -f skills/code-review/SKILL.md
+          test -f rules/CLAUDE.md
+
+      - name: Pack (dry run)
+        run: npm pack --dry-run
+
+  publish:
+    needs: validate
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@zanrafal"
+
+      - name: Publish (skip if version already exists)
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          NAME=$(node -p "require('./package.json').name")
+          if npm view "${NAME}@${VERSION}" version --registry=https://npm.pkg.github.com >/dev/null 2>&1; then
+            echo "Version ${VERSION} of ${NAME} already published; skipping."
+          else
+            npm publish
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

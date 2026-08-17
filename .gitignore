@@ -1,0 +1,8 @@
+# Local Claude Code state, project-agent config, and 10x-cli fetched material.
+# The m5l4 spec files and templates can be re-fetched with:
+#   npx @przeprogramowani/10x-cli@latest get m5l4
+.claude/
+
+# Node
+node_modules/
+*.tgz
